@@ -1,55 +1,43 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import productImage1 from "../assets/img/products/f1.jpg";
+import productImage2 from "../assets/img/products/f2.jpg";
+import productImage3 from "../assets/img/products/f3.jpg";
+import productImage4 from "../assets/img/products/f4.jpg";
+import productImage5 from "../assets/img/products/n1.jpg";
+import productImage6 from "../assets/img/products/n2.jpg";
+import productImage7 from "../assets/img/products/n3.jpg";
+import productImage8 from "../assets/img/products/n4.jpg";
 
 function ProductDetails() {
-  const { productId } = useParams();
+  // const { productId } = useParams();
+  const [itemCount, setItemCount] = useState(0);
 
-  useEffect(() => {
-    console.log("params:", productId);
-    alert(`product id is ${productId}`);
-  }, [productId]);
+  // useEffect(() => {
+  //   console.log("params:", productId);
+  //   alert(`product id is ${productId}`);
+  // }, [productId]);
 
   return (
     <>
       <section id="prodetails" className="section-p1">
         <div className="single-pro-image">
-          <img src="img/products/f1.jpg" width="100%" id="MainImg" alt="" />
+          <img src={productImage1} width="100%" id="MainImg" alt="" />
 
           <div className="small-img-group">
             <div className="small-img-col">
-              <img
-                src="img/products/f1.jpg"
-                width="100%"
-                className="small-img"
-                alt=""
-              />
+              <img src={productImage1} width="100%" className="small-img" alt="" />
             </div>
 
             <div className="small-img-col">
-              <img
-                src="img/products/f2.jpg"
-                width="100%"
-                className="small-img"
-                alt=""
-              />
+              <img src={productImage2} width="100%" className="small-img" alt="" />
             </div>
 
             <div className="small-img-col">
-              <img
-                src="img/products/f3.jpg"
-                width="100%"
-                className="small-img"
-                alt=""
-              />
+              <img src={productImage3} width="100%" className="small-img" alt="" />
             </div>
 
             <div className="small-img-col">
-              <img
-                src="img/products/f4.jpg"
-                width="100%"
-                className="small-img"
-                alt=""
-              />
+              <img src={productImage4} width="100%" className="small-img" alt="" />
             </div>
           </div>
         </div>
@@ -65,7 +53,15 @@ function ProductDetails() {
             <option>Small</option>
             <option>Large</option>
           </select>
-          <input type="number" value="1" />
+          <div>
+            <button onClick={() => setItemCount((prev) => prev + 1)}>+</button>
+            <span>{itemCount}</span>
+            <button
+              onClick={() => setItemCount((prev) => (prev > 0 ? prev - 1 : 1))}
+            >
+              -
+            </button>
+          </div>
           <button className="normal">Add to Cart</button>
           <h4>Product Details</h4>
           <span>
@@ -81,7 +77,7 @@ function ProductDetails() {
         <p>Summer Collection New Morden Design</p>
         <div className="pro-container">
           <div className="pro">
-            <img src="img/products/n1.jpg" alt="" />
+            <img src={productImage5} alt="" />
             <div className="des">
               <span>addibas</span>
               <h5>Cartoon Astronaut T-Shirts</h5>
@@ -100,7 +96,7 @@ function ProductDetails() {
           </div>
 
           <div className="pro">
-            <img src="img/products/n2.jpg" alt="" />
+            <img src={productImage6} alt="" />
             <div className="des">
               <span>addibas</span>
               <h5>Cartoon Astronaut T-Shirts</h5>
@@ -119,7 +115,7 @@ function ProductDetails() {
           </div>
 
           <div className="pro">
-            <img src="img/products/n3.jpg" alt="" />
+            <img src={productImage7} alt="" />
             <div className="des">
               <span>addibas</span>
               <h5>Cartoon Astronaut T-Shirts</h5>
@@ -138,7 +134,7 @@ function ProductDetails() {
           </div>
 
           <div className="pro">
-            <img src="img/products/n4.jpg" alt="" />
+            <img src={productImage8} alt="" />
             <div className="des">
               <span>addibas</span>
               <h5>Cartoon Astronaut T-Shirts</h5>

@@ -1,0 +1,123 @@
+[
+    {
+      "name": "Cotton Blend T-Shirt",
+      "price": 499,
+      "productDetails": "Comfortable and stylish cotton blend T-shirt for everyday wear.",
+      "image": "https://example.com/tshirt1.jpg"
+    },
+    {
+      "name": "Denim Jeans - Slim Fit",
+      "price": 1299,
+      "productDetails": "Classic slim-fit denim jeans for a trendy look.",
+      "image": "https://example.com/jeans1.jpg"
+    },
+    {
+      "name": "Casual Summer Dress",
+      "price": 899,
+      "productDetails": "Light and airy summer dress for casual occasions.",
+      "image": "https://example.com/dress1.jpg"
+    },
+    {
+      "name": "Formal Shirt - Striped",
+      "price": 1199,
+      "productDetails": "Elegant formal shirt with a stylish striped pattern.",
+      "image": "https://example.com/shirt1.jpg"
+    },
+    {
+      "name": "Sports Joggers",
+      "price": 799,
+      "productDetails": "Comfortable joggers for your active lifestyle.",
+      "image": "https://example.com/joggers1.jpg"
+    },
+    {
+      "name": "Printed Cotton Kurta",
+      "price": 649,
+      "productDetails": "Traditional printed cotton kurta for a cultural touch.",
+      "image": "https://example.com/kurta1.jpg"
+    },
+    {
+      "name": "Leather Jacket",
+      "price": 2499,
+      "productDetails": "Stylish leather jacket for a cool and edgy look.",
+      "image": "https://example.com/jacket1.jpg"
+    },
+    {
+      "name": "Sweatshirt - Hooded",
+      "price": 1099,
+      "productDetails": "Warm and comfortable hooded sweatshirt for chilly days.",
+      "image": "https://example.com/sweatshirt1.jpg"
+    },
+    {
+      "name": "Floral Print Blouse",
+      "price": 699,
+      "productDetails": "Chic floral print blouse for a feminine touch.",
+      "image": "https://example.com/blouse1.jpg"
+    },
+    {
+      "name": "Cargo Shorts",
+      "price": 599,
+      "productDetails": "Casual cargo shorts for a laid-back summer look.",
+      "image": "https://example.com/shorts1.jpg"
+    },
+    {
+      "name": "Saree - Silk Blend",
+      "price": 1899,
+      "productDetails": "Elegant silk blend saree for special occasions.",
+      "image": "https://example.com/saree1.jpg"
+    },
+    {
+      "name": "Polo Shirt - Classic Fit",
+      "price": 899,
+      "productDetails": "Timeless classic fit polo shirt for a smart-casual look.",
+      "image": "https://example.com/polo1.jpg"
+    },
+    {
+      "name": "Maxi Skirt - Boho Style",
+      "price": 1299,
+      "productDetails": "Bohemian style maxi skirt for a relaxed and trendy vibe.",
+      "image": "https://example.com/skirt1.jpg"
+    },
+    {
+      "name": "Track Jacket",
+      "price": 1199,
+      "productDetails": "Sporty track jacket for an active lifestyle.",
+      "image": "https://example.com/trackjacket1.jpg"
+    },
+    {
+      "name": "Anarkali Suit",
+      "price": 2199,
+      "productDetails": "Graceful Anarkali suit for festive occasions.",
+      "image": "https://example.com/anarkali1.jpg"
+    },
+    {
+      "name": "Chinos - Slim Fit",
+      "price": 899,
+      "productDetails": "Slim fit chinos for a polished and modern look.",
+      "image": "https://example.com/chinos1.jpg"
+    },
+    {
+      "name": "Casual Sneakers",
+      "price": 1299,
+      "productDetails": "Versatile casual sneakers for everyday wear.",
+      "image": "https://example.com/sneakers1.jpg"
+    },
+    {
+      "name": "Printed Palazzo Pants",
+      "price": 799,
+      "productDetails": "Stylish printed palazzo pants for a trendy ensemble.",
+      "image": "https://example.com/palazzo1.jpg"
+    },
+    {
+      "name": "Formal Blazer",
+      "price": 2999,
+      "productDetails": "Sophisticated formal blazer for a polished appearance.",
+      "image": "https://example.com/blazer1.jpg"
+    },
+    {
+      "name": "Knitted Sweater",
+      "price": 1499,
+      "productDetails": "Warm and cozy knitted sweater for cold days.",
+      "image": "https://example.com/sweater1.jpg"
+    }
+]
+  
