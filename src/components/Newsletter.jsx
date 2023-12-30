@@ -1,10 +1,11 @@
 function Newsletter() {
   return (
     <section id="newsletter" className="section-p1 section-m1">
-      <div className="newstext">
+      <div className="newsText">
         <h4>Sign Up For Newsletters</h4>
         <p>
-          get Email updates about our latest shop and <span>special offers.</span>
+          get Email updates about our latest shop and{" "}
+          <span>special offers.</span>
         </p>
       </div>
 

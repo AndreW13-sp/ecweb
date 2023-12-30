@@ -19,25 +19,45 @@ function ProductDetails() {
 
   return (
     <>
-      <section id="prodetails" className="section-p1">
+      <section id="productDetails" className="section-p1">
         <div className="single-pro-image">
           <img src={productImage1} width="100%" id="MainImg" alt="" />
 
           <div className="small-img-group">
             <div className="small-img-col">
-              <img src={productImage1} width="100%" className="small-img" alt="" />
+              <img
+                src={productImage1}
+                width="100%"
+                className="small-img"
+                alt=""
+              />
             </div>
 
             <div className="small-img-col">
-              <img src={productImage2} width="100%" className="small-img" alt="" />
+              <img
+                src={productImage2}
+                width="100%"
+                className="small-img"
+                alt=""
+              />
             </div>
 
             <div className="small-img-col">
-              <img src={productImage3} width="100%" className="small-img" alt="" />
+              <img
+                src={productImage3}
+                width="100%"
+                className="small-img"
+                alt=""
+              />
             </div>
 
             <div className="small-img-col">
-              <img src={productImage4} width="100%" className="small-img" alt="" />
+              <img
+                src={productImage4}
+                width="100%"
+                className="small-img"
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -65,9 +85,9 @@ function ProductDetails() {
           <button className="normal">Add to Cart</button>
           <h4>Product Details</h4>
           <span>
-            The Gidan Ultra Cotton T-shirt is made from a substantial 6.0 oz. per sq.
-            yd. fabric constructed from 100% cotton, this classic fit preshrunk
-            jersey knit provides unmatched comfort with each wear.
+            The Gidan Ultra Cotton T-shirt is made from a substantial 6.0 oz.
+            per sq. yd. fabric constructed from 100% cotton, this classic fit
+            preshrunk jersey knit provides unmatched comfort with each wear.
           </span>
         </div>
       </section>
@@ -79,7 +99,7 @@ function ProductDetails() {
           <div className="pro">
             <img src={productImage5} alt="" />
             <div className="des">
-              <span>addibas</span>
+              <span>Adidas</span>
               <h5>Cartoon Astronaut T-Shirts</h5>
               <div className="star">
                 <i className="fas fa-star"></i>
@@ -98,7 +118,7 @@ function ProductDetails() {
           <div className="pro">
             <img src={productImage6} alt="" />
             <div className="des">
-              <span>addibas</span>
+              <span>Adidas</span>
               <h5>Cartoon Astronaut T-Shirts</h5>
               <div className="star">
                 <i className="fas fa-star"></i>
@@ -117,7 +137,7 @@ function ProductDetails() {
           <div className="pro">
             <img src={productImage7} alt="" />
             <div className="des">
-              <span>addibas</span>
+              <span>Adidas</span>
               <h5>Cartoon Astronaut T-Shirts</h5>
               <div className="star">
                 <i className="fas fa-star"></i>
@@ -136,7 +156,7 @@ function ProductDetails() {
           <div className="pro">
             <img src={productImage8} alt="" />
             <div className="des">
-              <span>addibas</span>
+              <span>Adidas</span>
               <h5>Cartoon Astronaut T-Shirts</h5>
               <div className="star">
                 <i className="fas fa-star"></i>
@@ -155,10 +175,11 @@ function ProductDetails() {
       </section>
 
       <section id="newsletter" className="section-p1 section-m1">
-        <div className="newstext">
+        <div className="newsText">
           <h4>Sign Up For Newsletters</h4>
           <p>
-            get Email updates about our latest shop and <span>special offers.</span>
+            get Email updates about our latest shop and{" "}
+            <span>special offers.</span>
           </p>
         </div>
 

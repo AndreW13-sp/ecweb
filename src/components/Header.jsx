@@ -1,46 +1,44 @@
+import { Link } from "react-router-dom";
+import Logo from "../assets/img/logo.png";
+
+const links = [
+	{ href: "/", text: "Home" },
+	{ href: "/shop", text: "Shop" },
+	{ href: "/blog", text: "Blog" },
+	{ href: "/about", text: "About" },
+	{ href: "/contact", text: "Contact" },
+	{ href: "/cart", text: "Cart", icon: "fa-shopping-bag" },
+];
+
 function Header() {
-  return (
-    <section id="header">
-      <a href="/">
-        <img src="img/logo.png" className="logo" alt="" />
-      </a>
-      <nav>
-        <ul id="navbar">
-          <li>
-            <a href="index.html">Home</a>
-          </li>
-          <li>
-            <a href="shop.html">Shop</a>
-          </li>
-          <li>
-            <a href="blog.html">Blog</a>
-          </li>
-          <li>
-            <a className="active" href="about.html">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="contact.html">Contact</a>
-          </li>
-          <li>
-            <a id="lg-bag" href="cart.html">
-              <i className="far fa-shopping-bag"></i>
-            </a>
-          </li>
-          <a href="#" id="close">
-            <i className="far fa-times"></i>
-          </a>
-        </ul>
-      </nav>
-      <div id="mobile">
-        <a href="cart.html">
-          <i className="far fa-shopping-bag"></i>
-        </a>
-        <i id="bar" className="fas fa-outdent"></i>
-      </div>
-    </section>
-  );
+	return (
+		<section id="header">
+			<Link to="/">
+				<img src={Logo} className="logo" alt="" />
+			</Link>
+
+			<nav>
+				<ul id="navbar">
+					{links.map(({ href, text, icon }) => (
+						<li key={text}>
+							<Link to={href}>{icon ? <i className={`far ${icon}`}></i> : text}</Link>
+						</li>
+					))}
+
+					<Link to="#" id="close">
+						<i className="far fa-times"></i>
+					</Link>
+				</ul>
+			</nav>
+
+			<div id="mobile">
+				<Link to="/cart">
+					<i className="far fa-shopping-bag"></i>
+				</Link>
+				<i id="bar" className="fas fa-outdent"></i>
+			</div>
+		</section>
+	);
 }
 
 export default Header;
