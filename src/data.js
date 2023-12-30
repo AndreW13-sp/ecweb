@@ -33,6 +33,8 @@ const products = [
 		description: "Cartoon Astronaut T-Shirts",
 		rating: 5,
 		price: 999,
+		quantity: 1,
+		subImages: ["products/f1.jpg", "products/f2.jpg", "products/f3.jpg", "products/f4.jpg"],
 	},
 	{
 		id: "product-2",
@@ -41,6 +43,8 @@ const products = [
 		description: "Cartoon Astronaut T-Shirts",
 		rating: 5,
 		price: 999,
+		quantity: 1,
+		subImages: ["products/f1.jpg", "products/f2.jpg", "products/f3.jpg", "products/f4.jpg"],
 	},
 	{
 		id: "product-3",
@@ -49,6 +53,8 @@ const products = [
 		description: "Cartoon Astronaut T-Shirts",
 		rating: 5,
 		price: 999,
+		quantity: 1,
+		subImages: ["products/f1.jpg", "products/f2.jpg", "products/f3.jpg", "products/f4.jpg"],
 	},
 	{
 		id: "product-4",
@@ -57,6 +63,8 @@ const products = [
 		description: "Cartoon Astronaut T-Shirts",
 		rating: 5,
 		price: 999,
+		quantity: 1,
+		subImages: ["products/f1.jpg", "products/f2.jpg", "products/f3.jpg", "products/f4.jpg"],
 	},
 	{
 		id: "product-5",
@@ -65,6 +73,8 @@ const products = [
 		description: "Cartoon Astronaut T-Shirts",
 		rating: 5,
 		price: 999,
+		quantity: 1,
+		subImages: ["products/f1.jpg", "products/f2.jpg", "products/f3.jpg", "products/f4.jpg"],
 	},
 	{
 		id: "product-6",
@@ -73,6 +83,8 @@ const products = [
 		description: "Cartoon Astronaut T-Shirts",
 		rating: 5,
 		price: 999,
+		quantity: 1,
+		subImages: ["products/f1.jpg", "products/f2.jpg", "products/f3.jpg", "products/f4.jpg"],
 	},
 	{
 		id: "product-7",
@@ -81,6 +93,8 @@ const products = [
 		description: "Cartoon Astronaut T-Shirts",
 		rating: 5,
 		price: 999,
+		quantity: 1,
+		subImages: ["products/f1.jpg", "products/f2.jpg", "products/f3.jpg", "products/f4.jpg"],
 	},
 	{
 		id: "product-8",
@@ -89,6 +103,8 @@ const products = [
 		description: "Cartoon Astronaut T-Shirts",
 		rating: 5,
 		price: 999,
+		quantity: 1,
+		subImages: ["products/f1.jpg", "products/f2.jpg", "products/f3.jpg", "products/f4.jpg"],
 	},
 ];
 
