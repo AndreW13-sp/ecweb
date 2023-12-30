@@ -1,5 +1,19 @@
 import { useCallback, useMemo, useState } from "react";
 import { CartItem } from "../components";
+import Logo from "../assets/img/logo.png";
+function loadScript(src) {
+	return new Promise((resolve) => {
+	  const script = document.createElement("script");
+	  script.src = src;
+	  script.onload = () => {
+		resolve(true);
+	  };
+	  script.onerror = () => {
+		resolve(false);
+	  };
+	  document.body.appendChild(script);
+	});
+  }
 
 const _cartItems = [
 	{
@@ -40,6 +54,47 @@ function Cart() {
 	const calculateCartSubtotal = useMemo(() => {
 		return cartItems.reduce((total, item) => total + calculateItemSubtotal(item), 0);
 	}, [cartItems, calculateItemSubtotal]);
+
+	const handleCheckout = async (amount) => {
+		const res = await loadScript(
+			"https://checkout.razorpay.com/v1/checkout.js"
+		  );
+	  
+		  if (!res) {
+			alert("Razorpay SDK failed to load. Are you online?");
+			return;
+		  }
+	  
+		  const data = await fetch("http://localhost:1337/razorpay", {
+			method: "POST",
+			body: JSON.stringify({ amount: amount }),
+			headers: {
+			  "Content-Type": "application/json"
+			},
+		  }).then((t) => t.json());
+	  
+		  console.log(data);
+	  
+		  const options = {
+			key: data.key_id,
+			currency: data.currency,
+			amount: data.amount.toString(),
+			order_id: data.id,
+			name: "Donation",
+			description: "Thank you for nothing. Please give us some money",
+			image: Logo,
+			handler: function (response) {
+			  alert("Transaction successful");
+			},
+			prefill: {
+			  name: "Rajat",
+			  email: "rajat@rajat.com",
+			  phone_number: "9899999999",
+			},
+		  };
+		  const paymentObject = new window.Razorpay(options);
+		  paymentObject.open();
+	}
 
 	return (
 		<>
@@ -100,7 +155,7 @@ function Cart() {
 							</td>
 						</tr>
 					</table>
-					<button className="normal">Proceed to Checkout</button>
+					<button onClick={()=>handleCheckout(calculateCartSubtotal.toFixed(2))} className="normal">Proceed to Checkout</button>
 				</div>
 			</section>
 		</>
