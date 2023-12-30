@@ -41,7 +41,9 @@ const _cartItems = [
 
 function Cart() {
 	const [cartItems, setCartItems] = useState(_cartItems);
-
+	const [discount, setDiscount] = useState(0);
+	const [coupon, setCoupon] = useState("");
+	const [cartTotal, setCartTotal] = useState(0);
 	const updateCartQuantity = useCallback(
 		(itemId, quantity) => {
 			setCartItems(cartItems.map((item) => (item.id === itemId ? { ...item, quantity } : item)));
@@ -52,8 +54,11 @@ function Cart() {
 	const calculateItemSubtotal = useCallback((item) => item.price * item.quantity, []);
 
 	const calculateCartSubtotal = useMemo(() => {
-		return cartItems.reduce((total, item) => total + calculateItemSubtotal(item), 0);
-	}, [cartItems, calculateItemSubtotal]);
+		const total = cartItems.reduce((total, item) => total + calculateItemSubtotal(item), 0);
+		setCartTotal(total);
+		return total;
+	}, [cartItems, calculateItemSubtotal,setCartTotal,discount]);
+
 
 	const handleCheckout = async (amount) => {
 		const res = await loadScript(
@@ -96,6 +101,16 @@ function Cart() {
 		  paymentObject.open();
 	}
 
+	const applyCoupon = () => {
+		if(coupon == "cara30"){
+			setDiscount(calculateCartSubtotal * 0.3);
+			setCartTotal(calculateCartSubtotal);
+			alert("coupon applied");
+		}
+		else{
+			alert("invalid coupon");
+		}
+	}
 	return (
 		<>
 			<section id="cart" className="section-p1">
@@ -130,8 +145,8 @@ function Cart() {
 				<div id="coupon">
 					<h3>Apply coupon</h3>
 					<div>
-						<input type=" text" placeholder="enter coupon" />
-						<button className="normal">Apply</button>
+						<input onChange={(e)=>setCoupon(e.target.value)} id="coupon" type=" text" placeholder="enter coupon" />
+						<button onClick={applyCoupon} className="normal">Apply</button>
 					</div>
 				</div>
 
@@ -147,11 +162,15 @@ function Cart() {
 							<td>free</td>
 						</tr>
 						<tr>
+							<td>Discount</td>
+							<td>- {discount}</td>
+						</tr>
+						<tr>
 							<td>
 								<strong>Total</strong>
 							</td>
 							<td>
-								<strong>₹{calculateCartSubtotal.toFixed(2)}</strong>
+								<strong>₹{cartTotal-discount}</strong>
 							</td>
 						</tr>
 					</table>
