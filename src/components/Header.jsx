@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 import Logo from "../assets/img/logo.png";
 
 const links = [
@@ -11,6 +12,8 @@ const links = [
 ];
 
 function Header() {
+	const location = useLocation();
+
 	return (
 		<section id="header">
 			<Link to="/">
@@ -21,7 +24,9 @@ function Header() {
 				<ul id="navbar">
 					{links.map(({ href, text, icon }) => (
 						<li key={text}>
-							<Link to={href}>{icon ? <i className={`far ${icon}`}></i> : text}</Link>
+							<Link to={href} className={location.pathname === href && "active"}>
+								{icon ? <i className={`far ${icon}`}></i> : text}
+							</Link>
 						</li>
 					))}
 
