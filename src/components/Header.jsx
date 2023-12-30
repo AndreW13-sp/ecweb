@@ -24,7 +24,7 @@ function Header() {
 				<ul id="navbar">
 					{links.map(({ href, text, icon }) => (
 						<li key={text}>
-							<Link to={href} className={location.pathname === href && "active"}>
+							<Link to={href} className={location.pathname === href ? "active" : ""}>
 								{icon ? <i className={`far ${icon}`}></i> : text}
 							</Link>
 						</li>

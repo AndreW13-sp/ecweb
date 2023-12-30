@@ -2,11 +2,14 @@ import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Newsletter, ProductCard } from "../components";
+import { CART_ACTIONS, useCart } from "../contexts/CartContext";
 import { newArrivals, products } from "../data";
 import { importDynamicImage } from "../utils";
 
 function ProductDetails() {
 	const { productId } = useParams();
+	const { updateCart } = useCart();
+
 	const currentProduct = useMemo(() => products.find((p) => p.id === productId), [productId]);
 	const [size, setSize] = useState("");
 	const [itemCount, setItemCount] = useState(currentProduct.quantity);
@@ -16,6 +19,8 @@ function ProductDetails() {
 		() => itemCount * currentProduct.price,
 		[currentProduct.price, itemCount]
 	);
+
+	const handleAddToCart = (item) => updateCart({ action: CART_ACTIONS.ADD, payload: item });
 
 	return (
 		<>
@@ -51,11 +56,17 @@ function ProductDetails() {
 						value={itemCount}
 						onChange={(event) => {
 							const newValue = Math.max(1, parseInt(event.target.value, 10));
+							updateCart({
+								action: CART_ACTIONS.INC_ITEM,
+								payload: { item: currentProduct, quantity: newValue },
+							});
 							setItemCount(newValue);
 						}}
 					/>
 
-					<button className="normal">Add to Cart</button>
+					<button className="normal" onClick={() => handleAddToCart(currentProduct)}>
+						Add to Cart
+					</button>
 					<h4>Product Details</h4>
 
 					<span>
