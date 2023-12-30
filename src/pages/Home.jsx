@@ -35,6 +35,7 @@ function Home() {
 					{products.map((product) => (
 						<ProductCard
 							key={`featured-${product.id}`}
+							id={product.id}
 							image={importDynamicImage(product.image)}
 							name={product.name}
 							description={product.description}

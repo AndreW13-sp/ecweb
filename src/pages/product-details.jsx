@@ -10,6 +10,7 @@ function ProductDetails() {
 	const currentProduct = useMemo(() => products.find((p) => p.id === productId), [productId]);
 	const [size, setSize] = useState("");
 	const [itemCount, setItemCount] = useState(currentProduct.quantity);
+	const [mainProductImage, setMainProductImage] = useState(currentProduct.image);
 
 	const totalPrice = useMemo(
 		() => itemCount * currentProduct.price,
@@ -20,24 +21,14 @@ function ProductDetails() {
 		<>
 			<section id="productDetails" className="section-p1">
 				<div className="single-pro-image">
-					<img
-						src={importDynamicImage(currentProduct.image)}
-						width="100%"
-						id="MainImg"
-						alt=""
-					/>
+					<img src={importDynamicImage(mainProductImage)} width="100%" id="MainImg" alt="" />
 
 					<div className="small-img-group">
 						{currentProduct.subImages &&
 							currentProduct.subImages.length &&
 							currentProduct.subImages.map((img) => (
-								<div key={img} className="small-img-col">
-									<img
-										src={importDynamicImage(img)}
-										width="100%"
-										className="small-img"
-										alt=""
-									/>
+								<div key={img} className="small-img-col" onClick={() => setMainProductImage(img)}>
+									<img src={importDynamicImage(img)} width="100%" className="small-img" alt="" />
 								</div>
 							))}
 					</div>
@@ -68,9 +59,9 @@ function ProductDetails() {
 					<h4>Product Details</h4>
 
 					<span>
-						The Gidan Ultra Cotton T-shirt is made from a substantial 6.0 oz. per sq. yd.
-						fabric constructed from 100% cotton, this classic fit preshrunk jersey knit
-						provides unmatched comfort with each wear.
+						The Gidan Ultra Cotton T-shirt is made from a substantial 6.0 oz. per sq. yd. fabric
+						constructed from 100% cotton, this classic fit preshrunk jersey knit provides unmatched
+						comfort with each wear.
 					</span>
 				</div>
 			</section>
