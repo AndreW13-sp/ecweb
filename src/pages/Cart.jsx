@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { CartItem } from "../components";
 
 const _cartItems = [
@@ -37,9 +37,9 @@ function Cart() {
 
 	const calculateItemSubtotal = useCallback((item) => item.price * item.quantity, []);
 
-	const calculateCartSubtotal = () => {
+	const calculateCartSubtotal = useMemo(() => {
 		return cartItems.reduce((total, item) => total + calculateItemSubtotal(item), 0);
-	};
+	}, [cartItems, calculateItemSubtotal]);
 
 	return (
 		<>
@@ -85,7 +85,7 @@ function Cart() {
 					<table>
 						<tr>
 							<td>cart subtotal</td>
-							<td>₹{calculateCartSubtotal()}</td>
+							<td>₹{calculateCartSubtotal.toFixed(2)}</td>
 						</tr>
 						<tr>
 							<td>Shipping</td>
@@ -96,7 +96,7 @@ function Cart() {
 								<strong>Total</strong>
 							</td>
 							<td>
-								<strong>₹3332.31</strong>
+								<strong>₹{calculateCartSubtotal.toFixed(2)}</strong>
 							</td>
 						</tr>
 					</table>
