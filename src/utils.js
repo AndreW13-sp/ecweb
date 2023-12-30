@@ -8,6 +8,16 @@ const getImage = () => {
 	};
 };
 
+const loadScript = (src) => {
+	return new Promise((resolve, reject) => {
+		const script = document.createElement("script");
+		script.src = src;
+		script.onload = () => resolve(true);
+		script.onerror = () => reject(true);
+		document.body.appendChild(script);
+	});
+};
+
 const importDynamicImage = getImage();
 
-export { importDynamicImage };
+export { importDynamicImage, loadScript };

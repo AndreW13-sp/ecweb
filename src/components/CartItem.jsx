@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { importDynamicImage } from "../utils";
 
 // eslint-disable-next-line react/prop-types
-function CartItem({ id, name, image, price, quantity, updateCartQuantity }) {
+function CartItem({ id, name, image, price, quantity, updateCartQuantity, removeSelf }) {
 	const [itemCount, setItemCount] = useState(quantity);
 	const calculateSubtotal = useMemo(() => price * itemCount, [price, itemCount]);
 
 	return (
 		<tr>
 			<td>
-				<Link to="#">
+				<Link to="#" onClick={() => removeSelf(id)}>
 					<i className="far fa-times-circle"></i>
 				</Link>
 			</td>
