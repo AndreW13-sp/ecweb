@@ -159,4 +159,47 @@ const newArrivals = [
 	},
 ];
 
-export { featureBox, newArrivals, products };
+const blogs = [
+	{
+		id: "blog-1",
+		image: "blog/b1.jpg",
+		title: "The Cotton-Jersey Zip-Up Hoodie",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam illo architecto voluptatum minus omnis fugit maiores perferendis deleniti veniam quod libero assumenda doloribus alias magni, iste exercitationem repellat, porro eos.",
+		date: "13/01",
+	},
+	{
+		id: "blog-2",
+		image: "blog/b2.jpg",
+		title: "Two Lesbians",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam illo architecto voluptatum minus omnis fugit maiores perferendis deleniti veniam quod libero assumenda doloribus alias magni, iste exercitationem repellat, porro eos.",
+		date: "13/01",
+	},
+	{
+		id: "blog-3",
+		image: "blog/b3.jpg",
+		title: "The Style Guide",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam illo architecto voluptatum minus omnis fugit maiores perferendis deleniti veniam quod libero assumenda doloribus alias magni, iste exercitationem repellat, porro eos.",
+		date: "13/01",
+	},
+	{
+		id: "blog-4",
+		image: "blog/b4.jpg",
+		title: "The Cotton Hoodie",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam illo architecto voluptatum minus omnis fugit maiores perferendis deleniti veniam quod libero assumenda doloribus alias magni, iste exercitationem repellat, porro eos.",
+		date: "13/01",
+	},
+	{
+		id: "blog-5",
+		image: "blog/b5.jpg",
+		title: "Fashion Trends",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam illo architecto voluptatum minus omnis fugit maiores perferendis deleniti veniam quod libero assumenda doloribus alias magni, iste exercitationem repellat, porro eos.",
+		date: "13/01",
+	},
+];
+
+export { blogs, featureBox, newArrivals, products };

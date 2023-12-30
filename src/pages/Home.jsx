@@ -58,27 +58,8 @@ function Home() {
 			<section id="product1" className="section-p1">
 				<h2>New Arrival</h2>
 				<p>Summer Collection New Modern Design</p>
+
 				<div className="pro-container">
-					<div className="pro">
-						<img src="img/products/n1.jpg" alt="" />
-
-						<div className="des">
-							<span>Adidas</span>
-							<h5>Cartoon Astronaut T-Shirts</h5>
-							<div className="star">
-								<i className="fas fa-star"></i>
-								<i className="fas fa-star"></i>
-								<i className="fas fa-star"></i>
-								<i className="fas fa-star"></i>
-								<i className="fas fa-star"></i>
-							</div>
-							<h4>₹999</h4>
-						</div>
-						<a href="#">
-							<i className="fal fa-shopping-cart cart"></i>
-						</a>
-					</div>
-
 					{newArrivals.map((product) => (
 						<ProductCard
 							key={`newArrival-${product.id}`}
