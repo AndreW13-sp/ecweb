@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 import Logo from "../assets/img/logo.png";
 
@@ -24,9 +24,9 @@ function Header() {
 				<ul id="navbar">
 					{links.map(({ href, text, icon }) => (
 						<li key={text}>
-							<Link to={href} className={location.pathname === href ? "active" : ""}>
+							<NavLink to={href} className={location.pathname === href ? "active" : ""}>
 								{icon ? <i className={`far ${icon}`}></i> : text}
-							</Link>
+							</NavLink>
 						</li>
 					))}
 

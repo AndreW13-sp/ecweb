@@ -1,17 +1,19 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useCartStore } from "../store/cart";
 import { importDynamicImage } from "../utils";
 
 // eslint-disable-next-line react/prop-types
-function CartItem({ id, name, image, price, quantity, updateCartQuantity, removeSelf }) {
+function CartItem({ id, name, image, price, quantity, updateCartQuantity }) {
+	const { removeFromCart } = useCartStore();
 	const [itemCount, setItemCount] = useState(quantity);
 	const calculateSubtotal = useMemo(() => price * itemCount, [price, itemCount]);
 
 	return (
 		<tr>
 			<td>
-				<Link to="#" onClick={() => removeSelf(id)}>
+				<Link to="#" onClick={() => removeFromCart(id)}>
 					<i className="far fa-times-circle"></i>
 				</Link>
 			</td>

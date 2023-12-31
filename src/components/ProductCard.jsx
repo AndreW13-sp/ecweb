@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 function ProductCard({ id, image, name, description, rating, price }) {
+	const navigate = useNavigate();
+
 	return (
 		<div className="pro">
 			<Link to={`/product-details/${id}`}>
@@ -13,16 +15,16 @@ function ProductCard({ id, image, name, description, rating, price }) {
 
 					<div className="star">
 						{Array.from({ length: rating }).map((val) => (
-							<i key={val} className="fas fa-star"></i>
+							<i key={`render-${val}-${Math.random() * 20}`} className="fas fa-star"></i>
 						))}
 					</div>
 
 					<h4>₹{price}</h4>
 				</div>
 
-				<Link to="/cart">
+				<button onClick={() => navigate("/cart")}>
 					<i className="fal fa-shopping-cart cart"></i>
-				</Link>
+				</button>
 			</Link>
 		</div>
 	);

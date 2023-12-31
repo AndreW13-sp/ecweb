@@ -1,57 +1,26 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 
 import Logo from "../assets/img/logo.png";
 import { CartItem } from "../components";
+import { useCartStore } from "../store/cart";
 import { loadScript } from "../utils";
 
-const _cartItems = [
-	{
-		id: "cart-item-1",
-		image: "products/f2.jpg",
-		name: "Shirt",
-		price: 1110.77,
-		quantity: 1,
-	},
-	{
-		id: "cart-item-2",
-		image: "products/f3.jpg",
-		name: "Shirt",
-		price: 1110.77,
-		quantity: 1,
-	},
-	{
-		id: "cart-item-3",
-		image: "products/f4.jpg",
-		name: "Shirt",
-		price: 1110.77,
-		quantity: 1,
-	},
-];
-
 function Cart() {
-	const [cartItems, setCartItems] = useState(_cartItems);
+	// const [cartItems, setCartItems] = useState(_cartItems);
+	const { items, totalPrice, updateQuantity } = useCartStore((state) => ({
+		items: state.items,
+		totalPrice: state.totalPrice,
+		updateQuantity: state.updateQuantity,
+	}));
 	const [discount, setDiscount] = useState(0);
 	const [coupon, setCoupon] = useState("");
-	const [cartTotal, setCartTotal] = useState(0);
 
 	const updateCartQuantity = useCallback(
 		(itemId, quantity) => {
-			setCartItems(cartItems.map((item) => (item.id === itemId ? { ...item, quantity } : item)));
+			updateQuantity(itemId, quantity);
 		},
-		[cartItems]
+		[updateQuantity]
 	);
-
-	const calculateItemSubtotal = useCallback((item) => item.price * item.quantity, []);
-
-	const calculateCartSubtotal = useMemo(() => {
-		const total = cartItems.reduce((total, item) => total + calculateItemSubtotal(item), 0);
-		setCartTotal(total);
-		return total;
-	}, [cartItems, calculateItemSubtotal, setCartTotal]);
-
-	const removeItemFromCart = useCallback((productId) => {
-		setCartItems((existingCartItems) => existingCartItems.filter((p) => p.id !== productId));
-	}, []);
 
 	const handleCheckout = useCallback(async (amount) => {
 		const result = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
@@ -95,8 +64,7 @@ function Cart() {
 
 	const applyCouponCode = () => {
 		if (coupon == "cara30") {
-			setDiscount(calculateCartSubtotal * 0.3);
-			setCartTotal(calculateCartSubtotal);
+			setDiscount(totalPrice * 0.3);
 			alert("coupon applied");
 		} else {
 			alert("invalid coupon");
@@ -118,17 +86,8 @@ function Cart() {
 						</tr>
 					</thead>
 					<tbody>
-						{cartItems.map((item) => (
-							<CartItem
-								key={item.id}
-								id={item.id}
-								name={item.name}
-								image={item.image}
-								price={item.price}
-								quantity={item.quantity}
-								updateCartQuantity={updateCartQuantity}
-								removeSelf={removeItemFromCart}
-							/>
+						{items.map((item) => (
+							<CartItem key={item.id} {...item} updateCartQuantity={updateCartQuantity} />
 						))}
 					</tbody>
 				</table>
@@ -155,7 +114,7 @@ function Cart() {
 					<table>
 						<tr>
 							<td>cart subtotal</td>
-							<td>₹{calculateCartSubtotal.toFixed(2)}</td>
+							<td>₹{totalPrice.toFixed(2)}</td>
 						</tr>
 						<tr>
 							<td>Shipping</td>
@@ -170,14 +129,13 @@ function Cart() {
 								<strong>Total</strong>
 							</td>
 							<td>
-								<strong>₹{(discount ? cartTotal - discount : cartTotal).toFixed(2)}</strong>
+								<strong>
+									₹{(discount ? totalPrice - discount : totalPrice).toFixed(2)}
+								</strong>
 							</td>
 						</tr>
 					</table>
-					<button
-						onClick={() => handleCheckout(calculateCartSubtotal.toFixed(2))}
-						className="normal"
-					>
+					<button onClick={() => handleCheckout(totalPrice)} className="normal">
 						Proceed to Checkout
 					</button>
 				</div>

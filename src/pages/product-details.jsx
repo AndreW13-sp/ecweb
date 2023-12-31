@@ -1,14 +1,14 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Newsletter, ProductCard } from "../components";
-import { CART_ACTIONS, useCart } from "../contexts/CartContext";
 import { newArrivals, products } from "../data";
+import { useCartStore } from "../store/cart";
 import { importDynamicImage } from "../utils";
 
 function ProductDetails() {
 	const { productId } = useParams();
-	const { updateCart } = useCart();
+	const { updateQuantity, addToCart } = useCartStore();
 
 	const currentProduct = useMemo(() => products.find((p) => p.id === productId), [productId]);
 	const [size, setSize] = useState("");
@@ -20,7 +20,18 @@ function ProductDetails() {
 		[currentProduct.price, itemCount]
 	);
 
-	const handleAddToCart = (item) => updateCart({ action: CART_ACTIONS.ADD, payload: item });
+	const onQuantityChange = useCallback(
+		(event) => {
+			const value = Math.max(1, parseInt(event.target.value, 10));
+			setItemCount(() => value);
+			updateQuantity(currentProduct.id, value);
+		},
+		[currentProduct.id, updateQuantity]
+	);
+
+	const handleAddToCart = useCallback(() => {
+		addToCart({ ...currentProduct, quantity: itemCount, totalPrice });
+	}, [addToCart, currentProduct, itemCount, totalPrice]);
 
 	return (
 		<>
@@ -32,8 +43,17 @@ function ProductDetails() {
 						{currentProduct.subImages &&
 							currentProduct.subImages.length &&
 							currentProduct.subImages.map((img) => (
-								<div key={img} className="small-img-col" onClick={() => setMainProductImage(img)}>
-									<img src={importDynamicImage(img)} width="100%" className="small-img" alt="" />
+								<div
+									key={img}
+									className="small-img-col"
+									onClick={() => setMainProductImage(img)}
+								>
+									<img
+										src={importDynamicImage(img)}
+										width="100%"
+										className="small-img"
+										alt=""
+									/>
 								</div>
 							))}
 					</div>
@@ -51,18 +71,7 @@ function ProductDetails() {
 						<option>Large</option>
 					</select>
 
-					<input
-						type="number"
-						value={itemCount}
-						onChange={(event) => {
-							const newValue = Math.max(1, parseInt(event.target.value, 10));
-							updateCart({
-								action: CART_ACTIONS.INC_ITEM,
-								payload: { item: currentProduct, quantity: newValue },
-							});
-							setItemCount(newValue);
-						}}
-					/>
+					<input type="number" value={itemCount} onChange={onQuantityChange} />
 
 					<button className="normal" onClick={() => handleAddToCart(currentProduct)}>
 						Add to Cart
@@ -70,9 +79,9 @@ function ProductDetails() {
 					<h4>Product Details</h4>
 
 					<span>
-						The Gidan Ultra Cotton T-shirt is made from a substantial 6.0 oz. per sq. yd. fabric
-						constructed from 100% cotton, this classic fit preshrunk jersey knit provides unmatched
-						comfort with each wear.
+						The Gidan Ultra Cotton T-shirt is made from a substantial 6.0 oz. per sq. yd.
+						fabric constructed from 100% cotton, this classic fit preshrunk jersey knit
+						provides unmatched comfort with each wear.
 					</span>
 				</div>
 			</section>
