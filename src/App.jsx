@@ -1,31 +1,26 @@
-import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import { Footer, Header } from "./components";
-import { About, Blog, Cart, Contact, Home, ProductDetails, Shop } from "./pages";
-import { useCartStore } from "./store/cart";
+import MainLayout from "./layouts/main";
+import { About, Blog, Cart, Contact, Home, Login, ProductDetails, Shop, SignUp } from "./pages";
 
 function App() {
-	const cart = useCartStore((state) => ({ items: state.items, totalPrice: state.totalPrice }));
-
-	useEffect(() => {
-		console.log("Cart Item:", cart);
-	}, [cart]);
-
 	return (
 		<>
-			<Header />
 			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/blog" element={<Blog />} />
-				<Route path="/cart" element={<Cart />} />
-				<Route path="/contact" element={<Contact />} />
-				<Route path="/product-details/:productId" element={<ProductDetails />} />
-				<Route path="/shop" element={<Shop />} />
+				<Route path="/" element={<MainLayout page={Home} />} />
+				<Route path="/about" element={<MainLayout page={About} />} />
+				<Route path="/blog" element={<MainLayout page={Blog} />} />
+				<Route path="/cart" element={<MainLayout page={Cart} />} />
+				<Route path="/contact" element={<MainLayout page={Contact} />} />
+				<Route
+					path="/product-details/:productId"
+					element={<MainLayout page={ProductDetails} />}
+				/>
+				<Route path="/shop" element={<MainLayout page={Shop} />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
 			</Routes>
-			<Footer />
 		</>
 	);
 }
