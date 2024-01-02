@@ -1,11 +1,9 @@
-import Razorpay from "razorpay";
+import asyncHandler from "../utils/asyncHandler.util.js";
 
-import asyncHandler from "../utils/asyncHandler.js";
-
-const razorpay = new Razorpay({
-	key_id: process.env.RAZORPAY_KEY_ID,
-	key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+// const razorpay = new Razorpay({
+// 	key_id: process.env.RAZORPAY_KEY_ID,
+// 	key_secret: process.env.RAZORPAY_KEY_SECRET,
+// });
 
 const handlePayment = asyncHandler(async (req, res) => {
 	console.log(req.body);
@@ -21,14 +19,14 @@ const handlePayment = asyncHandler(async (req, res) => {
 	};
 
 	try {
-		const response = await razorpay.orders.create(options);
-		console.log(response);
-		res.status(200).json({
-			id: response.id,
-			currency: response.currency,
-			amount: response.amount,
-			key_id: process.env.RAZORPAY_KEY_ID,
-		});
+		// const response = await razorpay.orders.create(options);
+		// console.log(response);
+		// res.status(200).json({
+		// 	id: response.id,
+		// 	currency: response.currency,
+		// 	amount: response.amount,
+		// 	key_id: process.env.RAZORPAY_KEY_ID,
+		// });
 	} catch (err) {
 		console.log(err);
 	}

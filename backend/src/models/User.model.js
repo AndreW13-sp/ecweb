@@ -1,0 +1,71 @@
+import * as bcrypt from "bcrypt";
+import mongoose from "mongoose";
+
+import { UserRolesEnum } from "../utils/enumeration.util.js";
+
+const userSchema = new mongoose.Schema(
+	{
+		username: {
+			type: String,
+			required: true,
+			lowercase: true,
+		},
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		password: {
+			type: String,
+			required: true,
+		},
+		refreshToken: {
+			type: String,
+		},
+		salt: {
+			type: String,
+		},
+		profile: {
+			type: mongoose.Types.ObjectId,
+			ref: "Profile",
+		},
+		role: {
+			type: String,
+			enum: Object.values(UserRolesEnum),
+			default: UserRolesEnum.User,
+		},
+	},
+	{ timestamps: true }
+);
+
+userSchema.pre("save", async function (next) {
+	if (this.isModified("password")) {
+		try {
+			const salt = await bcrypt.genSalt(10);
+			const hashedVersion = await bcrypt.hash(this.password, salt);
+			this.password = hashedVersion;
+			this.salt = salt;
+			next();
+		} catch (err) {
+			return next(err);
+		}
+	}
+	return next();
+});
+
+userSchema.methods.isPasswordCorrect = async function (textPassword) {
+	return await bcrypt.compare(textPassword, this.password);
+};
+
+userSchema.methods.serialize = function () {
+	const self = this.toObject();
+	delete self.password;
+	delete self.refreshToken;
+	delete self.salt;
+	delete self.__v;
+	return self;
+};
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
