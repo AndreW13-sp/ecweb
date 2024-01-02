@@ -9,10 +9,10 @@ function Newsletter() {
 				</p>
 			</div>
 
-			<div className="form">
-				<input type="text" placeholder="Your email address" />
+			{/* <form className="form">
+				<input type="text" placeholder="Your email address"/>
 				<button className="normal">Sign Up</button>
-			</div>
+			</form> */}
 		</section>
 	);
 }

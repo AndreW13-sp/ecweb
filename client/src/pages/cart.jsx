@@ -28,7 +28,7 @@ function Cart() {
 			return alert("Razorpay SDK failed to load. Are you online?");
 		}
 
-		const response = await fetch("http://localhost:1337/razorpay", {
+		const response = await fetch("http://localhost:3000/api/v1/checkout/create-order", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -145,3 +145,4 @@ function Cart() {
 }
 
 export default Cart;
+
