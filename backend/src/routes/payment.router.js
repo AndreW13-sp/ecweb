@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import { handlePayment } from "../controllers/payment.controller";
+import { handlePayment } from "../controllers/payment.controller.js";
 
 /**
  * Payment Router for RazorPay Gateway
  */
 const router = Router();
 
-router.route("/pay").post(handlePayment);
+router.route("/create-order").post(handlePayment);
 
 export default router;
