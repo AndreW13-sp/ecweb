@@ -590,6 +590,10 @@ footer a:hover {
 	padding: 14px;
 }
 
+#page-header h2{
+	color: #fff;
+}
+
 #pagination {
 	text-align: center;
 }
@@ -1017,6 +1021,7 @@ footer a:hover {
 	}
 
 	#close {
+		border:none;
 		display: initial;
 		position: absolute;
 		top: 30px;

@@ -33,8 +33,8 @@ function Footer() {
 
 			<div className="col">
 				<h4>My Account</h4>
-				<a href="/signup.html">Sign In</a>
-				<a href="#">View Cart</a>
+				<a href="/signup">Sign up</a>
+				<a href="/cart">View Cart</a>
 				<a href="#">My Wishlist</a>
 				<a href="#">Track My Orders</a>
 				<a href="#">Help</a>

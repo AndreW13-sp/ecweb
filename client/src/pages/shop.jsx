@@ -5,6 +5,11 @@ import { importDynamicImage } from "../utils";
 function Shop() {
 	return (
 		<>
+			<section id="page-header">
+				<h2>#Stay Home</h2>
+				<p>Save more with coupons & up to 70% off!</p>
+			</section>
+			
 			<section id="product1" className="section-p1">
 				<div className="pro-container">
 					{products.map(({ image, ...product }) => (
@@ -17,3 +22,4 @@ function Shop() {
 }
 
 export default Shop;
+

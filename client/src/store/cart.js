@@ -47,11 +47,11 @@ const useCartStore = create((set) => ({
 			// Find the item from the current state matching the itemId param
 			const itemToUpdate = state.items.find((item) => item.id === itemId);
 			if (!itemToUpdate) {
-				alert("Cart does not have that item, added it first by clicking Add to Cart button");
+				// alert("Cart does not have that item, added it first by clicking Add to Cart button");
 				return state;
 			}
 			if (newQuantity < 1) {
-				alert("Minimum 1 quantity is required");
+				// alert("Minimum 1 quantity is required");
 				return state;
 			}
 

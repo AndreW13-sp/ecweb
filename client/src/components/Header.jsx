@@ -1,6 +1,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 import Logo from "../assets/img/logo.png";
+import { useState } from "react";
 
 const links = [
 	{ href: "/", text: "Home" },
@@ -14,6 +15,8 @@ const links = [
 function Header() {
 	const location = useLocation();
 
+	const [mobile,setMobile] = useState(false)
+
 	return (
 		<section id="header">
 			<Link to="/">
@@ -21,7 +24,7 @@ function Header() {
 			</Link>
 
 			<nav>
-				<ul id="navbar">
+				<ul className={mobile ? "active" : ""} id="navbar">
 					{links.map(({ href, text, icon }) => (
 						<li key={text}>
 							<NavLink to={href} className={location.pathname === href ? "active" : ""}>
@@ -30,13 +33,13 @@ function Header() {
 						</li>
 					))}
 
-					<Link to="#" id="close">
+					<button id="close" onClick={() => setMobile(false)}>
 						<i className="far fa-times"></i>
-					</Link>
+					</button>
 				</ul>
 			</nav>
 
-			<div id="mobile">
+			<div id="mobile" onClick={() => setMobile(true)}>
 				<Link to="/cart">
 					<i className="far fa-shopping-bag"></i>
 				</Link>
@@ -47,3 +50,8 @@ function Header() {
 }
 
 export default Header;
+
+
+
+
+
