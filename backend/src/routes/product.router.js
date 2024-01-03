@@ -7,7 +7,7 @@ import {
 	getProducts,
 	updateProduct,
 } from "../controllers/product.controller.js";
-import validateRequestInput from "../middlewares/validation.middleware.js";
+import { validateRequestInput } from "../middlewares/validation.middleware.js";
 
 /**
  * Product Router

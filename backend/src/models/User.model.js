@@ -1,4 +1,5 @@
 import * as bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
 import { UserRolesEnum } from "../utils/enumeration.util.js";
@@ -62,8 +63,37 @@ userSchema.methods.serialize = function () {
 	delete self.password;
 	delete self.refreshToken;
 	delete self.salt;
+	delete self.updatedAt;
 	delete self.__v;
 	return self;
+};
+
+userSchema.methods.generateAccessToken = function () {
+	return jwt.sign(
+		{
+			id: this._id,
+			email: this.email,
+			role: this.role,
+		},
+		process.env.ACCESS_TOKEN_SECRET,
+		{
+			expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+		}
+	);
+};
+
+userSchema.methods.generateRefreshToken = function () {
+	return jwt.sign(
+		{
+			id: this._id,
+			email: this.email,
+			role: this.role,
+		},
+		process.env.REFRESH_TOKEN_SECRET,
+		{
+			expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+		}
+	);
 };
 
 const User = mongoose.model("User", userSchema);

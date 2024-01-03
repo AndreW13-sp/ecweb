@@ -10,13 +10,17 @@ export const createUserDto = z.object({
 
 export const userIdValidation = z.object({
 	params: z.object({
-		userId: z.string(),
+		userId: z.string({
+			required_error: "userId is required and must be provided in the url parameter",
+		}),
 	}),
 });
 
 export const updateUserDto = z.object({
 	params: z.object({
-		userId: z.string(),
+		userId: z.string({
+			required_error: "userId is required and must be provided in the url parameter",
+		}),
 	}),
 	body: z.object({
 		username: z.string().min(2, "name must be at least 2 characters long").optional(),

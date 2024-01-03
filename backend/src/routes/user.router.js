@@ -7,7 +7,8 @@ import {
 	getUsers,
 	updateUser,
 } from "../controllers/user.controller.js";
-import validateRequestInput from "../middlewares/validation.middleware.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { validateRequestInput } from "../middlewares/validation.middleware.js";
 import { createUserDto, updateUserDto, userIdValidation } from "../schemas/user.schema.js";
 
 /**
@@ -15,12 +16,12 @@ import { createUserDto, updateUserDto, userIdValidation } from "../schemas/user.
  */
 const router = Router();
 
-router.route("/").get(getUsers).post(validateRequestInput(createUserDto), createUser);
+router.route("/").get(verifyJWT, getUsers).post(validateRequestInput(createUserDto), createUser);
 
 router
 	.route("/:userId")
-	.get(validateRequestInput(userIdValidation), getUser)
-	.patch(validateRequestInput(updateUserDto), updateUser)
-	.delete(validateRequestInput(userIdValidation), deleteUser);
+	.get(verifyJWT, validateRequestInput(userIdValidation), getUser)
+	.patch(verifyJWT, validateRequestInput(updateUserDto), updateUser)
+	.delete(verifyJWT, validateRequestInput(userIdValidation), deleteUser);
 
 export default router;
