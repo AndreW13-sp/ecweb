@@ -1247,7 +1247,8 @@ footer a:hover {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #4070f4;
+	/* background-color: #c2e9fb; */
+	background: linear-gradient(15deg, rgba(70, 134, 161, 0),rgb(59, 142, 184),rgb(19, 161, 183));
 	column-gap: 30px;
 }
 
