@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 
 import Logo from "../assets/img/logo.png";
 import { CartItem } from "../components";
+import MainLayout from "../layouts/main";
 import { useCartStore } from "../store/cart";
 import { loadScript } from "../utils";
 
@@ -72,7 +73,7 @@ function Cart() {
 	};
 
 	return (
-		<>
+		<MainLayout>
 			<section id="cart" className="section-p1">
 				<table width="100%">
 					<thead>
@@ -140,9 +141,8 @@ function Cart() {
 					</button>
 				</div>
 			</section>
-		</>
+		</MainLayout>
 	);
 }
 
 export default Cart;
-

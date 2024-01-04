@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 
 import DecorationImage from "../assets/img/people/white_bg_pic.png";
 import Newsletter from "../components/Newsletter";
+import MainLayout from "../layouts/main";
 
 function Contact() {
 	const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
@@ -12,7 +13,7 @@ function Contact() {
 	}, []);
 
 	return (
-		<>
+		<MainLayout>
 			<section id="contact-details" className="section-p1">
 				<div className="details">
 					<span>Get In Touch</span>
@@ -100,7 +101,7 @@ function Contact() {
 			</section>
 
 			<Newsletter />
-		</>
+		</MainLayout>
 	);
 }
 

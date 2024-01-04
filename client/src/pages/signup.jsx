@@ -1,20 +1,64 @@
-import { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
+import { axiosInstance } from "../utils";
 
 function SignUp() {
-	const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "" });
+	const [formData, setFormData] = useState({ email: "", password: "", username: "" });
+	const { user, setUser } = useAuth((state) => ({ setUser: state.setUser, user: state.user }));
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (user) {
+			navigate("/");
+		}
+	}, [navigate, user]);
 
 	const handleInputChange = useCallback((event) => {
 		const { name, value } = event.target;
 		setFormData((prevState) => ({ ...prevState, [name]: value }));
 	}, []);
 
+	const handleSubmit = useCallback(
+		async (event) => {
+			event.preventDefault();
+			if (!formData.username || !formData.email || !formData.password) {
+				alert("Please enter all the fields");
+				return;
+			}
+
+			try {
+				const { data } = await axiosInstance.post("/auth/register", formData);
+				setUser({ id: data.data._id, username: data.data.username, email: data.data.email });
+				navigate("/login");
+			} catch (err) {
+				console.log(err);
+				if (err?.response.status === 409) {
+					alert("Email is already in use. Please enter a different email address");
+				}
+			}
+		},
+		[formData, setUser]
+	);
+
 	return (
 		<section className="container forms">
 			<div className="form signup">
 				<div className="form-content">
 					<header>Signup</header>
-					<form>
+
+					<form onSubmit={handleSubmit}>
+						<div className="field input-field">
+							<input
+								type="text"
+								name="username"
+								placeholder="Username"
+								className="input"
+								value={formData.username}
+								onChange={handleInputChange}
+							/>
+						</div>
+
 						<div className="field input-field">
 							<input
 								type="email"
@@ -25,6 +69,7 @@ function SignUp() {
 								onChange={handleInputChange}
 							/>
 						</div>
+
 						<div className="field input-field">
 							<input
 								type="password"
@@ -35,17 +80,7 @@ function SignUp() {
 								onChange={handleInputChange}
 							/>
 						</div>
-						<div className="field input-field">
-							<input
-								type="password"
-								name="confirmPassword"
-								placeholder="Confirm password"
-								className="password"
-								value={formData.confirmPassword}
-								onChange={handleInputChange}
-							/>
-							<i className="bx bx-hide eye-icon"></i>
-						</div>
+
 						<div className="field button-field">
 							<button>Signup</button>
 						</div>

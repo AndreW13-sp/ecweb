@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { Newsletter, ProductCard } from "../components";
 import { newArrivals, products } from "../data";
+import MainLayout from "../layouts/main";
 import { useCartStore } from "../store/cart";
 import { importDynamicImage } from "../utils";
 
@@ -34,7 +35,7 @@ function ProductDetails() {
 	}, [addToCart, currentProduct, itemCount, totalPrice]);
 
 	return (
-		<>
+		<MainLayout>
 			<section id="productDetails" className="section-p1">
 				<div className="single-pro-image">
 					<img src={importDynamicImage(mainProductImage)} width="100%" id="MainImg" alt="" />
@@ -97,7 +98,7 @@ function ProductDetails() {
 			</section>
 
 			<Newsletter />
-		</>
+		</MainLayout>
 	);
 }
 

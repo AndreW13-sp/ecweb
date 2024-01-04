@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 
 import Newsletter from "../components/Newsletter";
 import { blogs } from "../data";
+import MainLayout from "../layouts/main";
 import { importDynamicImage } from "../utils";
 
 function Blog() {
 	return (
-		<>
+		<MainLayout>
 			<section id="page-header" className="blog-header">
 				<h2>#readmore</h2>
 				<p>Read all case studies about our products !!!</p>
@@ -38,7 +39,7 @@ function Blog() {
 			</section>
 
 			<Newsletter />
-		</>
+		</MainLayout>
 	);
 }
 

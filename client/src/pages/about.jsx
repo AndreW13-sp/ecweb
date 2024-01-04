@@ -1,8 +1,9 @@
 import AboutImage from "../assets/img/about/a6.jpg";
+import MainLayout from "../layouts/main";
 
 function About() {
 	return (
-		<>
+		<MainLayout>
 			<section id="page-header" className="about-header">
 				<h2>#knowUs</h2>
 				<p>Sup !!!</p>
@@ -27,7 +28,7 @@ function About() {
 					</marquee>
 				</div>
 			</section>
-		</>
+		</MainLayout>
 	);
 }
 

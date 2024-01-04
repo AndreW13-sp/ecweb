@@ -1,14 +1,19 @@
+import propTypes from "prop-types";
+
 import { Footer, Header } from "../components";
 
-// eslint-disable-next-line react/prop-types
-function MainLayout({ page: Page }) {
+function MainLayout({ children }) {
 	return (
 		<>
 			<Header />
-			<Page />
+			{children}
 			<Footer />
 		</>
 	);
 }
+
+MainLayout.propTypes = {
+	children: propTypes.node,
+};
 
 export default MainLayout;

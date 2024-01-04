@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const getImage = () => {
 	const assets = import.meta.glob("./assets/img/**/*.{png,jpg}", { eager: true });
 
@@ -8,7 +10,7 @@ const getImage = () => {
 	};
 };
 
-const loadScript = (src) => {
+export const loadScript = (src) => {
 	return new Promise((resolve, reject) => {
 		const script = document.createElement("script");
 		script.src = src;
@@ -18,6 +20,9 @@ const loadScript = (src) => {
 	});
 };
 
-const importDynamicImage = getImage();
+export const importDynamicImage = getImage();
 
-export { importDynamicImage, loadScript };
+export const axiosInstance = axios.create({
+	baseURL: "http://localhost:3000/api/v1",
+	headers: { "Content-Type": "application/json" },
+});

@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
+import Newsletter from "../components/Newsletter";
 import ProductCard from "../components/ProductCard";
 import { featureBox, newArrivals, products } from "../data";
+import MainLayout from "../layouts/main";
 import { importDynamicImage } from "../utils";
-import Newsletter from "../components/Newsletter";
 
 function Home() {
 	return (
-		<>
+		<MainLayout>
 			<section id="hero">
 				<h4>Trade-in-offer</h4>
 				<h2>Super value deals</h2>
@@ -108,10 +109,8 @@ function Home() {
 				</div>
 			</section>
 
-			<Newsletter>
-						
-			</Newsletter>
-		</>
+			<Newsletter />
+		</MainLayout>
 	);
 }
 
