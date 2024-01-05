@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 
+import { Config } from "./config.js";
+
 let instance = null;
 
 async function connect() {
 	try {
 		if (!instance) {
-			instance = await mongoose.connect(process.env.DATABASE_URL);
+			instance = await mongoose.connect(Config.Database.URL);
 		}
 
 		// On successful connection to MongoDB database

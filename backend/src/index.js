@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 
 import { app } from "./app.js";
+import { Config } from "./lib/config.js";
 import connect from "./lib/connect.js";
 
 // Load and parse environment variables
@@ -11,7 +12,7 @@ dotenv.config({});
 	await connect();
 
 	// Spin up the express server
-	const PORT = process.env.PORT || 3000;
+	const PORT = Config.App.Port;
 	app.listen(PORT, console.log(`Server up and running at http://localhost:${PORT}/api/v1`));
 
 	// Listen for any unhandled exceptions thrown by the server

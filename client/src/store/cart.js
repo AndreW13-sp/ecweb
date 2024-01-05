@@ -15,7 +15,6 @@ const useCartStore = create((set) => ({
 	totalPrice: 0,
 
 	addToCart: (newItem) => {
-		console.log("----------", newItem, "----------");
 		const serializedItem = serializeCartItem(newItem);
 
 		set((state) => ({
@@ -42,7 +41,6 @@ const useCartStore = create((set) => ({
 	},
 
 	updateQuantity: (itemId, newQuantity) => {
-		console.log("Updating the item with this data =>", { itemId, newQuantity });
 		set((state) => {
 			// Find the item from the current state matching the itemId param
 			const itemToUpdate = state.items.find((item) => item.id === itemId);

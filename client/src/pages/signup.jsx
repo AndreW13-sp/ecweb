@@ -29,7 +29,8 @@ function SignUp() {
 
 			try {
 				const { data } = await axiosInstance.post("/auth/register", formData);
-				setUser({ id: data.data._id, username: data.data.username, email: data.data.email });
+				const { _id, username, email } = data.data;
+				setUser({ id: _id, username, email });
 				navigate("/login");
 			} catch (err) {
 				console.log(err);
@@ -38,7 +39,7 @@ function SignUp() {
 				}
 			}
 		},
-		[formData, setUser]
+		[formData, navigate, setUser]
 	);
 
 	return (

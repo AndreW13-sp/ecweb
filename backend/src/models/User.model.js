@@ -2,6 +2,7 @@ import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
+import { Config } from "../lib/config.js";
 import { UserRolesEnum } from "../utils/enumeration.util.js";
 
 const userSchema = new mongoose.Schema(
@@ -75,9 +76,9 @@ userSchema.methods.generateAccessToken = function () {
 			email: this.email,
 			role: this.role,
 		},
-		process.env.ACCESS_TOKEN_SECRET,
+		Config.Jwt.AccessTokenSecret,
 		{
-			expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+			expiresIn: Config.Jwt.AccessTokenExpiry,
 		}
 	);
 };
@@ -89,9 +90,9 @@ userSchema.methods.generateRefreshToken = function () {
 			email: this.email,
 			role: this.role,
 		},
-		process.env.REFRESH_TOKEN_SECRET,
+		Config.Jwt.RefreshTokenSecret,
 		{
-			expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+			expiresIn: Config.Jwt.RefreshTokenExpiry,
 		}
 	);
 };

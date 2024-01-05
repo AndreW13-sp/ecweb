@@ -1,20 +1,25 @@
 import { useCallback, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/img/logo.png";
 import { CartItem } from "../components";
 import MainLayout from "../layouts/main";
 import { useCartStore } from "../store/cart";
-import { loadScript } from "../utils";
+import { axiosInstance, loadScript } from "../utils";
+import { useAuth } from "./../store/auth";
 
 function Cart() {
-	// const [cartItems, setCartItems] = useState(_cartItems);
-	const { items, totalPrice, updateQuantity } = useCartStore((state) => ({
+	const { items, totalPrice, updateQuantity, clearCart } = useCartStore((state) => ({
 		items: state.items,
 		totalPrice: state.totalPrice,
 		updateQuantity: state.updateQuantity,
+		clearCart: state.clearCart,
 	}));
+	const { user, jwtToken } = useAuth((state) => ({ user: state.user, jwtToken: state.jwtToken }));
+
 	const [discount, setDiscount] = useState(0);
 	const [coupon, setCoupon] = useState("");
+	const navigate = useNavigate();
 
 	const updateCartQuantity = useCallback(
 		(itemId, quantity) => {
@@ -23,45 +28,48 @@ function Cart() {
 		[updateQuantity]
 	);
 
-	const handleCheckout = useCallback(async (amount) => {
-		const result = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-		if (!result) {
-			return alert("Razorpay SDK failed to load. Are you online?");
-		}
+	const handleCheckout = useCallback(
+		async (cartAmount) => {
+			const result = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+			if (!result) {
+				return alert("Razorpay SDK failed to load. Are you online?");
+			}
 
-		const response = await fetch("http://localhost:3000/api/v1/checkout/create-order", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ amount: amount }),
-		});
-		const data = await response.json();
+			// Set the jwt token with the request object
+			axiosInstance.interceptors.request.use((config) => {
+				config.headers.Authorization = `Bearer ${jwtToken}`;
+				return config;
+			});
+			// Send the payment request to the backend
+			const response = await axiosInstance.post("/checkout/create-order", {
+				amount: cartAmount,
+			});
 
-		console.log(data);
+			const { id, currency, amount, key_id } = response.data.data;
 
-		const options = {
-			key: data.key_id,
-			currency: data.currency,
-			amount: data.amount.toString(),
-			order_id: data.id,
-			name: "Donation",
-			description: "Thank you for nothing. Please give us some money",
-			image: Logo,
-			handler: function (response) {
-				void response;
-				alert("Transaction successful");
-			},
-			prefill: {
-				name: "Rajat",
-				email: "rajat@rajat.com",
-				phone_number: "9899999999",
-			},
-		};
-
-		const paymentObject = new window.Razorpay(options);
-		paymentObject.open();
-	}, []);
+			// Process the payment
+			const paymentObject = new window.Razorpay({
+				currency,
+				key: key_id,
+				amount: amount.toString(),
+				order_id: id,
+				name: "Donation",
+				description: "Thank you for nothing. Please give us some money",
+				image: Logo,
+				handler: () => {
+					clearCart();
+					navigate("/");
+				},
+				prefill: {
+					name: user.username,
+					email: user.email,
+					phone_number: "9899999999",
+				},
+			});
+			paymentObject.open();
+		},
+		[clearCart, jwtToken, navigate, user.email, user.username]
+	);
 
 	const applyCouponCode = () => {
 		if (coupon == "cara30") {

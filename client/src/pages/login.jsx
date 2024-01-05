@@ -30,8 +30,11 @@ function Login() {
 
 			try {
 				const { data } = await axiosInstance.post("/auth/login", formData);
-				setUser(data.data.user);
-				setToken(data.data.access_token);
+				const { user, access_token } = data.data;
+				// Set the auth state
+				setUser(user);
+				setToken(access_token);
+				// Redirect to home page after successful login
 				navigate("/");
 			} catch (err) {
 				console.log(err);

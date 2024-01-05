@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 
 import { AuthorizationError } from "../errors/AuthorizationError.js";
 import ApiResponse from "../lib/ApiResponse.js";
+import { Config } from "../lib/config.js";
 import { generateTokens } from "../lib/generate-jwt-tokens.js";
 import User from "../models/User.model.js";
 import asyncHandler from "../utils/asyncHandler.util.js";
@@ -47,7 +48,7 @@ export const refreshToken = asyncHandler(async (req, res) => {
 
 	try {
 		// Verify the refresh token
-		const decodedToken = jwt.verify(refreshTokenFromRequest, process.env.REFRESH_TOKEN_SECRET);
+		const decodedToken = jwt.verify(refreshTokenFromRequest, Config.Jwt.RefreshTokenSecret);
 
 		// Find the user with the refresh token info
 		const user = await User.findById(decodedToken?.id);

@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { findUserOrThrowError } from "../controllers/user.controller.js";
 import { AuthorizationError } from "../errors/AuthorizationError.js";
 import asyncHandler from "../utils/asyncHandler.util.js";
+import { Config } from "./../lib/config.js";
 
 export const verifyJWT = asyncHandler(async (req, res, next) => {
 	try {
@@ -14,7 +15,7 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
 		}
 
 		// Decode the token and access the user info
-		const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+		const decodedToken = jwt.verify(token, Config.Jwt.AccessTokenSecret);
 
 		// Find the user in the database
 		const user = await findUserOrThrowError({
