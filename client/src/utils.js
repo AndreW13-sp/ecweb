@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuth } from "./store/auth";
 
 const getImage = () => {
 	const assets = import.meta.glob("./assets/img/**/*.{png,jpg}", { eager: true });
@@ -22,7 +23,17 @@ export const loadScript = (src) => {
 
 export const importDynamicImage = getImage();
 
-export const axiosInstance = axios.create({
+export const publicApi = axios.create({
 	baseURL: "http://localhost:3000/api/v1",
-	headers: { "Content-Type": "application/json" },
+	headers: {
+		"Content-Type": "application/json",
+	},
+});
+
+export const protectedApi = axios.create({
+	baseURL: "http://localhost:3000/api/v1",
+	headers: {
+		"Content-Type": "application/json",
+		Authorization: "Bearer " + useAuth.getState().jwtToken,
+	},
 });

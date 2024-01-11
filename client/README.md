@@ -1,8 +1,20 @@
-# React + Vite
+# FrontEnd Site of our eCommerce Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Made with [React](https://react.dev/) and [Vite](https://vitejs.dev/) with couple of other libraries for api integration and state management.
 
-Currently, two official plugins are available:
+### Dependencies used 🌳
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-  [Axios](https://axios-http.com/docs/intro) - for api integration.
+-  [Zustand](https://zustand-demo.pmnd.rs/) - for state management.
+
+### Contributors ✨
+
+-  [AndreW13-sp](https://github.com/AndreW13-sp)
+-  [ayush-dedhia25](https://github.com/ayush-dedhia25)
+-  [ShreeSamal](https://github.com/)
+
+### Screenshots 📸
+
+![Home page](./ecweb/home-page.png)
+![Shop Page](./ecweb/shop-page.png)
+![Blogs page](./ecweb/blogs-page.png)

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 export const useAuth = create(
 	persist(
@@ -7,12 +7,14 @@ export const useAuth = create(
 			user: null,
 			jwtToken: null,
 
-			setUser: (newUser) => set({ user: newUser }),
+			// User data
+			setUser: (user) => set({ user }),
 			logout: () => set({ user: null }),
 
-			setToken: (newToken) => set({ jwtToken: newToken }),
+			// JWT Token
+			setToken: (token) => set({ jwtToken: token }),
 			clearToken: () => set({ jwtToken: null }),
 		}),
-		{ name: "auth", storage: createJSONStorage(() => localStorage) }
+		{ name: "auth-store" }
 	)
 );

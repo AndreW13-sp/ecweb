@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
-import { axiosInstance } from "../utils";
+import { publicApi } from "../utils";
 
 function SignUp() {
 	const [formData, setFormData] = useState({ email: "", password: "", username: "" });
@@ -28,7 +28,7 @@ function SignUp() {
 			}
 
 			try {
-				const { data } = await axiosInstance.post("/auth/register", formData);
+				const { data } = await publicApi.post("/auth/register", formData);
 				const { _id, username, email } = data.data;
 				setUser({ id: _id, username, email });
 				navigate("/login");

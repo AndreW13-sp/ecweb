@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../store/auth";
-import { axiosInstance } from "../utils";
+import { publicApi } from "../utils";
 
 function Login() {
 	const [formData, setFormData] = useState({ email: "", password: "" });
@@ -29,7 +29,7 @@ function Login() {
 			}
 
 			try {
-				const { data } = await axiosInstance.post("/auth/login", formData);
+				const { data } = await publicApi.post("/auth/login", formData);
 				const { user, access_token } = data.data;
 				// Set the auth state
 				setUser(user);

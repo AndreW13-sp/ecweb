@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/img/logo.png";
 import { CartItem } from "../components";
 import MainLayout from "../layouts/main";
 import { useCartStore } from "../store/cart";
-import { axiosInstance, loadScript } from "../utils";
+import { loadScript, protectedApi } from "../utils";
 import { useAuth } from "./../store/auth";
 
 function Cart() {
@@ -15,7 +15,7 @@ function Cart() {
 		updateQuantity: state.updateQuantity,
 		clearCart: state.clearCart,
 	}));
-	const { user, jwtToken } = useAuth((state) => ({ user: state.user, jwtToken: state.jwtToken }));
+	const user = useAuth((state) => state.user);
 
 	const [discount, setDiscount] = useState(0);
 	const [coupon, setCoupon] = useState("");
@@ -35,13 +35,8 @@ function Cart() {
 				return alert("Razorpay SDK failed to load. Are you online?");
 			}
 
-			// Set the jwt token with the request object
-			axiosInstance.interceptors.request.use((config) => {
-				config.headers.Authorization = `Bearer ${jwtToken}`;
-				return config;
-			});
 			// Send the payment request to the backend
-			const response = await axiosInstance.post("/checkout/create-order", {
+			const response = await protectedApi.post("/checkout/create-order", {
 				amount: cartAmount,
 			});
 
@@ -68,7 +63,7 @@ function Cart() {
 			});
 			paymentObject.open();
 		},
-		[clearCart, jwtToken, navigate, user.email, user.username]
+		[clearCart, navigate, user.email, user.username]
 	);
 
 	const applyCouponCode = () => {
@@ -83,23 +78,38 @@ function Cart() {
 	return (
 		<MainLayout>
 			<section id="cart" className="section-p1">
-				<table width="100%">
-					<thead>
-						<tr>
-							<td>Remove</td>
-							<td>Image</td>
-							<td>Product</td>
-							<td>Price</td>
-							<td>Quantity</td>
-							<td>Subtotal</td>
-						</tr>
-					</thead>
-					<tbody>
-						{items.map((item) => (
-							<CartItem key={item.id} {...item} updateCartQuantity={updateCartQuantity} />
-						))}
-					</tbody>
-				</table>
+				{items && items.length ? (
+					<table width="100%">
+						<thead>
+							<tr>
+								<td>Remove</td>
+								<td>Image</td>
+								<td>Product</td>
+								<td>Price</td>
+								<td>Quantity</td>
+								<td>Subtotal</td>
+							</tr>
+						</thead>
+						<tbody>
+							{items.map((item) => (
+								<CartItem key={item.id} {...item} updateCartQuantity={updateCartQuantity} />
+							))}
+						</tbody>
+					</table>
+				) : (
+					// This will render if the cart is empty
+					<div className="empty-cart-content">
+						<h3 className="empty-cart__title">Hmmmm, seems like your cart is empty!</h3>
+						<p className="empty-cart__text">
+							Start with adding product to your cart <Link to="/shop">here</Link>
+						</p>
+						<img
+							src="https://img.freepik.com/free-vector/shopping-basket_53876-37459.jpg?size=626&ext=jpg&ga=GA1.1.1143917245.1704946318&semt=ais"
+							alt="No items in the cart"
+							className="empty-cart__image"
+						/>
+					</div>
+				)}
 			</section>
 
 			<section id="cart-add" className="section-p1">
